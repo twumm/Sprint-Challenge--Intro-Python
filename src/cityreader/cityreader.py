@@ -8,8 +8,8 @@ import csv
 class City:
     def __init__(self, name, lat, lon):
         self.name = name
-        self.lat = lat
-        self.lon = lon
+        self.lat = float(lat)
+        self.lon = float(lon)
 
 
 # We have a collection of US cities with population over 750,000 stored in the
@@ -35,16 +35,16 @@ def cityreader(cities=[]):
         file_content = csv.reader(csv_file, delimiter=',')
         next(file_content)
         for row in file_content:
-          cities.append(City(row[0], float(row[3]), float(row[4])))
+            cities.append(City(row[0], row[3], row[4]))
     return cities
 
 
 cityreader(cities)
-
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
     print(f'{c.name}, {c.lat}, {c.lon}\n')
-
+    # pass
+    
 # STRETCH GOAL!
 #
 # Allow the user to input two points, each specified by latitude and longitude.
@@ -76,13 +76,29 @@ for c in cities:
 
 # TODO Get latitude and longitude values from the user
 
+# latlon1 = input('Enter lat1, lon1: ').split(' ')
+# latlon2 = input('Enter lat2, lon2: ').split(' ')
+# print(latlon1)
 
+from numpy import arange
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
+    if lat1 > lat2:
+      old_lat2 = lat2
+      lat2 = lat1
+      lat1 = old_lat2
+    
+    if lon1 > lon2:
+      old_lon2 = lon2
+      lon2 = lon1
+      lon1 = old_lon2
 
     # TODO Ensure that the lat and lon valuse are all floats
     # Go through each city and check to see if it falls within
     # the specified coordinates.
+    for city in cities:
+      if int(city.lat) in arange(float(lat1), float(lat2)) and int(city.lon) in arange(float(lon1), float(lon2)):
+        within.append(city)
 
     return within

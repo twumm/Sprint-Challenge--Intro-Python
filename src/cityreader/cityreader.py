@@ -35,7 +35,7 @@ def cityreader(cities=[]):
         file_content = csv.reader(csv_file, delimiter=',')
         next(file_content)
         for row in file_content:
-          cities.append(City(row[0], row[3], row[4]))
+          cities.append(City(row[0], float(row[3]), float(row[4])))
     return cities
 
 

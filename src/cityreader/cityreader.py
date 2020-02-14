@@ -44,7 +44,7 @@ cityreader(cities)
 for c in cities:
     print(f'{c.name}, {c.lat}, {c.lon}\n')
     # pass
-    
+
 # STRETCH GOAL!
 #
 # Allow the user to input two points, each specified by latitude and longitude.
@@ -80,7 +80,7 @@ for c in cities:
 # latlon2 = input('Enter lat2, lon2: ').split(' ')
 # print(latlon1)
 
-from numpy import arange
+# from numpy import arange
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
@@ -98,7 +98,10 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # Go through each city and check to see if it falls within
     # the specified coordinates.
     for city in cities:
-      if int(city.lat) in arange(float(lat1), float(lat2)) and int(city.lon) in arange(float(lon1), float(lon2)):
+      # use less than or greater than
+      if city.lat >= float(lat1) and city.lat <= float(lat2) and city.lon >= float(lon1) and city.lon <= float(lon2):
         within.append(city)
+      # if int(city.lat) in arange(float(lat1), float(lat2)) and int(city.lon) in arange(float(lon1), float(lon2)):
+      #   within.append(city)
 
     return within
